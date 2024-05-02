@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Load Blockly core -->
+    <script src="./blockly/blockly_compressed.js"></script>
+    <!-- Load the default blocks -->
+    <script src="./blockly/blocks_compressed.js"></script>
+    <!-- Load a generators -->
+    <script src="./blockly/javascript_compressed.js"></script>
+    <script src="./blockly/lua_compressed.js"></script>
+    <!-- Load a message file -->
+    <script src="./blockly/msg/en.js"></script>
+
+</head>
+<body>
+<div id="toolbox"></div>
+<div id="blocklyDiv" style="height: 95cqh; width: 95cqw;"></div>
+</body>
+<script src="./custom_toolbox.js"></script>
+<!--<script src="./complex_toolbox.js"></script>-->
+<!--<script src="./simple_toolbox.js"></script>-->
+<script>
+    // renderer	string	Determines the renderer used by blockly. Pre-packaged renderers include 'geras' (the default), 'thrasos', and 'zelos' (a scratch-like renderer).
+    //     toolbox	string, XML or JSON	Tree structure of categories and blocks available to the user. See defining the toolbox for more information.
+    //     toolboxPosition	string	If "start" toolbox is on top (if horizontal) or left (if vertical and LTR) or right (if vertical and RTL). If "end" toolbox is on opposite side. Defaults to "start".
+    //     plugins	object	Map of plugin type to name of registered plugin or plugin class. See injecting subclasses.
+    const config = {
+        grid:
+            {
+                spacing: 20,
+                length: 3,
+                colour: '#ccc',
+                snap: true
+            },
+        oneBasedIndex: false,
+        sounds: false,
+        toolbox: toolbox,
+        zoom:{ controls:true}
+
+    };
+    const workspace = Blockly.inject('blocklyDiv', config);
+</script>
+
+</html>
