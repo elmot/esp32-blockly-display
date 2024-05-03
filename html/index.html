@@ -14,15 +14,31 @@
 
     <script src="led16_segment_blocks.js"></script>
     <script src="led_control.js"></script>
+    <style>
+        #displayDiv {
+            padding: 2cqh;
+            position: absolute;
+            right: 5cqw;
+            top: 5cqh;
+            background-color: #f8f8f8;
+            border: darkslategrey 3px dashed;
+            border-radius: 1cqw;
+        }
+
+        #displayDiv embed {
+            height: 12cqh;
+            width: 7cqw
+        }
+    </style>
 </head>
 <body>
-<div id="toolbox"></div>
-<div id="blocklyDiv" style="height: 80cqh; width: 95cqw;"></div>
-<div id="displayDiv" style="height: 15cqh; width: 95cqw;">
-    <embed type="image/svg+xml" id="digit0" style="height: 10cqh; width: 7cqw">
-    <embed type="image/svg+xml" id="digit1" style="height: 10cqh; width: 7cqw">
-    <embed type="image/svg+xml" id="digit2" style="height: 10cqh; width: 7cqw">
-    <embed type="image/svg+xml" id="digit3" style="height: 10cqh; width: 7cqw">
+<div id="blocklyDiv" style="height: 95cqh; width: 95cqw;"></div>
+<!-- todo make normal <button id="save">Save</button>-->
+<div id="displayDiv">
+    <embed type="image/svg+xml" id="digit0">
+    <embed type="image/svg+xml" id="digit1">
+    <embed type="image/svg+xml" id="digit2">
+    <embed type="image/svg+xml" id="digit3">
 </div>
 </body>
 <script>
@@ -52,6 +68,20 @@
     document.getElementById("digit1").src = led16Svg
     document.getElementById("digit2").src = led16Svg
     document.getElementById("digit3").src = led16Svg
+    // document.getElementById("save").addEventListener("click", function () {
+    //     console.log(JSON.stringify(Blockly.serialization.workspaces.save(workspace)))
+    // }) //todo make normalRussia
+    //todo remove
+    // Blockly.serialization.workspaces.load(
+    //     JSON.parse('{"blocks":{"languageVersion":0,"blocks":[{"type":"led_16_segments_text","id":"D46A5oqnM*c*yQ5uX;=.","x":310,"y":390,"inputs":{"TEXT":{"block":{"type":"text","id":"C,/Nu1mmbk@ja8l(V4:q","fields":{"TEXT":' +
+    //         '"БЮ"}}}}}]}}')
+    //     , workspace)
+    //Todo remove
+    // setTimeout(function () {
+    //
+    //     eval(javascript.javascriptGenerator.workspaceToCode(workspace))
+    // }, 100)
+
 </script>
 
 </html>
