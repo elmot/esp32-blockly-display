@@ -12,15 +12,19 @@
     <!-- Load a message file -->
     <script src="./blockly/msg/en.js"></script>
 
+    <script src="led16_segment_blocks.js"></script>
+    <script src="led_control.js"></script>
 </head>
 <body>
 <div id="toolbox"></div>
-<div id="blocklyDiv" style="height: 95cqh; width: 95cqw;"></div>
+<div id="blocklyDiv" style="height: 80cqh; width: 95cqw;"></div>
+<div id="displayDiv" style="height: 15cqh; width: 95cqw;">
+    <embed type="image/svg+xml" id="digit0" style="height: 10cqh; width: 7cqw">
+    <embed type="image/svg+xml" id="digit1" style="height: 10cqh; width: 7cqw">
+    <embed type="image/svg+xml" id="digit2" style="height: 10cqh; width: 7cqw">
+    <embed type="image/svg+xml" id="digit3" style="height: 10cqh; width: 7cqw">
+</div>
 </body>
-<script src="./custom_blocks.js"></script>
-<script src="./custom_toolbox.js"></script>
-<!--<script src="./complex_toolbox.js"></script>-->
-<!--<script src="./simple_toolbox.js"></script>-->
 <script>
     const config = {
         grid:
@@ -38,12 +42,16 @@
     };
     const workspace = Blockly.inject("blocklyDiv", config);
     workspace.addChangeListener(function (event) {
-        if(event.type === Blockly.Events.BLOCK_CHANGE)
-            alert(javascript.javascriptGenerator.workspaceToCode(workspace))
+            if (event.type === Blockly.Events.BLOCK_CHANGE)
+                eval(javascript.javascriptGenerator.workspaceToCode(workspace))
         }
     )
-    //todo delay block
-    //todo text block
+    //todo display stuff led
+    //todo save/restore
+    document.getElementById("digit0").src = led16Svg
+    document.getElementById("digit1").src = led16Svg
+    document.getElementById("digit2").src = led16Svg
+    document.getElementById("digit3").src = led16Svg
 </script>
 
 </html>
