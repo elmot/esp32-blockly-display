@@ -1,45 +1,45 @@
 const toolbox = {
-    kind: 'categoryToolbox',
+    kind: "categoryToolbox",
     contents: [
         {
-            kind: 'category',
-            name: 'Logic',
-            categorystyle: 'logic_category',
+            kind: "category",
+            name: "Logic",
+            categorystyle: "logic_category",
             contents: [
                 {
-                    kind: 'block',
-                    type: 'controls_if',
+                    kind: "block",
+                    type: "controls_if",
                 },
                 {
-                    kind: 'block',
-                    type: 'logic_compare',
+                    kind: "block",
+                    type: "logic_compare",
                 },
                 {
-                    kind: 'block',
-                    type: 'logic_operation',
+                    kind: "block",
+                    type: "logic_operation",
                 },
                 {
-                    kind: 'block',
-                    type: 'logic_negate',
+                    kind: "block",
+                    type: "logic_negate",
                 },
                 {
-                    kind: 'block',
-                    type: 'logic_boolean',
+                    kind: "block",
+                    type: "logic_boolean",
                 },
             ],
         },
         {
-            kind: 'category',
-            name: 'Loops',
-            categorystyle: 'loop_category',
+            kind: "category",
+            name: "Loops",
+            categorystyle: "loop_category",
             contents: [
                 {
-                    kind: 'block',
-                    type: 'controls_repeat_ext',
+                    kind: "block",
+                    type: "controls_repeat_ext",
                     inputs: {
                         TIMES: {
                             shadow: {
-                                type: 'math_number',
+                                type: "math_number",
                                 fields: {
                                     NUM: 10,
                                 },
@@ -48,30 +48,30 @@ const toolbox = {
                     },
                 },
                 {
-                    kind: 'block',
-                    type: 'controls_flow_statements',
+                    kind: "block",
+                    type: "controls_flow_statements",
                 },
             ],
         },
         {
-            kind: 'category',
-            name: 'Math',
-            categorystyle: 'math_category',
+            kind: "category",
+            name: "Math",
+            categorystyle: "math_category",
             contents: [
                 {
-                    kind: 'block',
-                    type: 'math_number',
+                    kind: "block",
+                    type: "math_number",
                     fields: {
                         NUM: 123,
                     },
                 },
                 {
-                    kind: 'block',
-                    type: 'math_arithmetic',
+                    kind: "block",
+                    type: "math_arithmetic",
                     inputs: {
                         A: {
                             shadow: {
-                                type: 'math_number',
+                                type: "math_number",
                                 fields: {
                                     NUM: 1,
                                 },
@@ -79,7 +79,7 @@ const toolbox = {
                         },
                         B: {
                             shadow: {
-                                type: 'math_number',
+                                type: "math_number",
                                 fields: {
                                     NUM: 1,
                                 },
@@ -88,12 +88,12 @@ const toolbox = {
                     },
                 },
                 {
-                    kind: 'block',
-                    type: 'math_single',
+                    kind: "block",
+                    type: "math_single",
                     inputs: {
                         NUM: {
                             shadow: {
-                                type: 'math_number',
+                                type: "math_number",
                                 fields: {
                                     NUM: 9,
                                 },
@@ -102,12 +102,12 @@ const toolbox = {
                     },
                 },
                 {
-                    kind: 'block',
-                    type: 'math_number_property',
+                    kind: "block",
+                    type: "math_number_property",
                     inputs: {
                         NUMBER_TO_CHECK: {
                             shadow: {
-                                type: 'math_number',
+                                type: "math_number",
                                 fields: {
                                     NUM: 0,
                                 },
@@ -118,42 +118,42 @@ const toolbox = {
             ],
         },
         {
-            kind: 'category',
-            name: 'Text',
-            categorystyle: 'text_category',
+            kind: "category",
+            name: "Text",
+            categorystyle: "text_category",
             contents: [
                 {
-                    kind: 'block',
-                    type: 'text',
+                    kind: "block",
+                    type: "text",
                 },
                 {
-                    'kind': 'label',
-                    'text': 'Input/Output:',
-                    'web-class': 'ioLabel',
+                    "kind": "label",
+                    "text": "Input/Output:",
+                    "web-class": "ioLabel",
                 },
                 {
-                    kind: 'block',
-                    type: 'text_print',
+                    kind: "block",
+                    type: "text_print",
                     inputs: {
                         TEXT: {
                             shadow: {
-                                type: 'text',
+                                type: "text",
                                 fields: {
-                                    TEXT: 'abc',
+                                    TEXT: "abc",
                                 },
                             },
                         },
                     },
                 },
                 {
-                    kind: 'block',
-                    type: 'text_prompt_ext',
+                    kind: "block",
+                    type: "text_prompt_ext",
                     inputs: {
                         TEXT: {
                             shadow: {
-                                type: 'text',
+                                type: "text",
                                 fields: {
-                                    TEXT: 'abc',
+                                    TEXT: "abc",
                                 },
                             },
                         },
@@ -162,16 +162,16 @@ const toolbox = {
             ],
         },
         {
-            kind: 'category',
-            name: 'Variables',
-            categorystyle: 'variable_category',
-            custom: 'VARIABLE',
+            kind: "category",
+            name: "Variables",
+            categorystyle: "variable_category",
+            custom: "VARIABLE",
         },
         {
-            kind: 'category',
-            name: 'Functions',
-            categorystyle: 'procedure_category',
-            custom: 'PROCEDURE',
+            kind: "category",
+            name: "Functions",
+            categorystyle: "procedure_category",
+            custom: "PROCEDURE",
         },
     ],
 };
