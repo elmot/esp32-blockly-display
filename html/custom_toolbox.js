@@ -196,6 +196,14 @@ const toolbox = {
                 {
                     kind: "block",
                     type: "led_16_segments",
+                },
+                {
+                    kind: "block",
+                    type: "sleep",
+                },
+                {
+                    kind: "block",
+                    type: "led_16_segments_text",
                 }
             ]
         },
