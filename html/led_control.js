@@ -95,7 +95,6 @@ const font = {
     'Б': 'ABCDFGHJN',
     'Ю': 'ABDEFGJLP',
 };
-М
 // noinspection JSUnusedGlobalSymbols
 function segm16Text(text) {
     for (let i = 0; i < 4; i++) {

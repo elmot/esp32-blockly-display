@@ -11,8 +11,12 @@
     <script src="./blockly/javascript_compressed.js"></script>
     <!-- Load a message file -->
     <script src="./blockly/msg/en.js"></script>
+    <!--    MQTT CLIENT-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"
+            type="text/javascript"></script>
 
     <script src="led16_segment_blocks.js"></script>
+    <script src="toolbox.js"></script>
     <script src="led_control.js"></script>
     <style>
         #displayDiv {
@@ -68,19 +72,9 @@
     document.getElementById("digit1").src = led16Svg
     document.getElementById("digit2").src = led16Svg
     document.getElementById("digit3").src = led16Svg
-    // document.getElementById("save").addEventListener("click", function () {
-    //     console.log(JSON.stringify(Blockly.serialization.workspaces.save(workspace)))
-    // }) //todo make normalRussia
-    //todo remove
-    // Blockly.serialization.workspaces.load(
-    //     JSON.parse('{"blocks":{"languageVersion":0,"blocks":[{"type":"led_16_segments_text","id":"D46A5oqnM*c*yQ5uX;=.","x":310,"y":390,"inputs":{"TEXT":{"block":{"type":"text","id":"C,/Nu1mmbk@ja8l(V4:q","fields":{"TEXT":' +
-    //         '"БЮ"}}}}}]}}')
-    //     , workspace)
-    //Todo remove
-    // setTimeout(function () {
-    //
-    //     eval(javascript.javascriptGenerator.workspaceToCode(workspace))
-    // }, 100)
+    workspace.registerButtonCallback("file-run", function(button){alert(button.info.file_key)})
+    workspace.registerButtonCallback("file-load", function(button){alert(button.info.file_key)})
+    workspace.registerButtonCallback("file-save", function(button){alert(button.info.file_key)})
 
 </script>
 

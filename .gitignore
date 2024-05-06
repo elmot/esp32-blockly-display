@@ -3,3 +3,4 @@ cmake-build*/
 *.tgz
 *.zip
 blockly.src/
+*.bin
