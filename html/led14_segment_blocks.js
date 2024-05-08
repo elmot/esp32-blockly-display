@@ -18,21 +18,21 @@ var led14Svg = URL.createObjectURL(new Blob(['<?xml version="1.0" encoding="utf-
 '    <g><circle fill="#E0E0E0" cx="296.5" cy="426.5" r="16.5"/></g>\n' +
 '</g>\n' +
 '    <g id="Layer_2">\n' +
-'        <text transform="matrix(1 0 0 1 195.5767 24.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">A</text>\n' +
-'        <text transform="matrix(1 0 0 1 288.5767 126.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">B</text>\n' +
-'        <text transform="matrix(1 0 0 1 249.5767 338.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">C</text>\n' +
-'        <text transform="matrix(1 0 0 1 117.5767 436.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">D</text>\n' +
-'        <text transform="matrix(1 0 0 1 25.5767 338.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">E</text>\n' +
-'        <text transform="matrix(1 0 0 1 63.5767 126.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">F</text>\n' +
-'        <text transform="matrix(1 0 0 1 96.5767 230.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">G</text>\n' +
-'        <text transform="matrix(1 0 0 1 211.377 230.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">H</text>\n' +
-'        <text transform="matrix(1 0 0 1 126.377 151.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">I</text>\n' +
-'        <text transform="matrix(1 0 0 1 170.377 117.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">J</text>\n' +
-'        <text transform="matrix(1 0 0 1 212.377 151.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">K</text>\n' +
-'        <text transform="matrix(1 0 0 1 180 303.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">L</text>\n' +
-'        <text transform="matrix(1 0 0 1 135 335.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">M</text>\n' +
-'        <text transform="matrix(1 0 0 1 99.5767 303.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">N</text>\n' +
-'        <text transform="matrix(1 0 0 1 290 435.2002)" font-family="\'FiraCode-Bold\'" font-size="24px">O</text>\n' +
+'        <text transform="matrix(1 0 0 1 195.5767 24.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">A</text>\n' +
+'        <text transform="matrix(1 0 0 1 288.5767 126.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">B</text>\n' +
+'        <text transform="matrix(1 0 0 1 249.5767 338.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">C</text>\n' +
+'        <text transform="matrix(1 0 0 1 117.5767 436.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">D</text>\n' +
+'        <text transform="matrix(1 0 0 1 25.5767 338.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">E</text>\n' +
+'        <text transform="matrix(1 0 0 1 63.5767 126.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">F</text>\n' +
+'        <text transform="matrix(1 0 0 1 96.5767 230.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">G</text>\n' +
+'        <text transform="matrix(1 0 0 1 211.377 230.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">H</text>\n' +
+'        <text transform="matrix(1 0 0 1 126.377 151.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">I</text>\n' +
+'        <text transform="matrix(1 0 0 1 170.377 117.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">J</text>\n' +
+'        <text transform="matrix(1 0 0 1 212.377 151.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">K</text>\n' +
+'        <text transform="matrix(1 0 0 1 180 303.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">L</text>\n' +
+'        <text transform="matrix(1 0 0 1 135 335.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">M</text>\n' +
+'        <text transform="matrix(1 0 0 1 99.5767 303.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">N</text>\n' +
+'        <text transform="matrix(1 0 0 1 290 435.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">O</text>\n' +
 '</g>\n' +
 '</svg>\n'], {type : 'image/svg+xml'}));
 Blockly.Blocks["led_14_segments"] = {
