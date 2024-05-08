@@ -18,6 +18,7 @@
     <script src="led16_segment_blocks.js"></script>
     <script src="toolbox.js"></script>
     <script src="led_control.js"></script>
+    <script src="comm.js"></script>
     <style>
         #displayDiv {
             padding: 2cqh;
@@ -33,12 +34,33 @@
             height: 12cqh;
             width: 7cqw
         }
+
+        #connect-circle {
+            width: 1cqmax;
+            height: 1cqmax;
+            border-radius: 25px;
+            background: gray;
+            display: inline-block;
+
+            #connect-tooltip {
+                position: absolute;
+                visibility: hidden;
+            }
+        }
+
+        #connect-circle:hover #connect-tooltip {
+            visibility: visible;
+            background-color: antiquewhite;
+        }
     </style>
 </head>
 <body>
 <div id="blocklyDiv" style="height: 95cqh; width: 95cqw;"></div>
 <!-- todo make normal <button id="save">Save</button>-->
 <div id="displayDiv">
+    <div id="connect-circle">
+        <div id="connect-tooltip">Connecting...</div>
+    </div>
     <embed type="image/svg+xml" id="digit0">
     <embed type="image/svg+xml" id="digit1">
     <embed type="image/svg+xml" id="digit2">
@@ -72,10 +94,18 @@
     document.getElementById("digit1").src = led16Svg
     document.getElementById("digit2").src = led16Svg
     document.getElementById("digit3").src = led16Svg
-    workspace.registerButtonCallback("file-run", function(button){alert(button.info.file_key)})
-    workspace.registerButtonCallback("file-load", function(button){alert(button.info.file_key)})
-    workspace.registerButtonCallback("file-save", function(button){alert(button.info.file_key)})
+    workspace.registerButtonCallback("file-run", function (button) {
+        alert(button.info.file_key)
+    })
+    workspace.registerButtonCallback("file-load", function (button) {
+        MqttClient.load(button.info.file_key)
+    })
+    workspace.registerButtonCallback("file-save", function (button) {
+        const state = Blockly.serialization.workspaces.save(workspace);
+        MqttClient.save(button.info.file_key, JSON.stringify(state))
+    })
 
+    MqttClient.start()
 </script>
 
 </html>
