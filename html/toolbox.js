@@ -207,7 +207,7 @@ const toolbox = {
             contents: [
                 {
                     kind: "block",
-                    type: "led_16_segments",
+                    type: "led_14_segments",
                 },
                 {
                     kind: "block",
@@ -215,7 +215,7 @@ const toolbox = {
                 },
                 {
                     kind: "block",
-                    type: "led_16_segments_text",
+                    type: "led_14_segments_text",
                 }
             ]
         },
