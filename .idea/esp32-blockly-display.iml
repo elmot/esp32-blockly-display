@@ -7,4 +7,12 @@
     <orderEntry type="library" name="paho-mqtt" level="application" />
     <orderEntry type="library" name="mqtt" level="application" />
   </component>
+  <component name="PyNamespacePackagesService">
+    <option name="namespacePackageFolders">
+      <list>
+        <option value="$MODULE_DIR$/micropython/lib/mqtt" />
+        <option value="$MODULE_DIR$/micropython/src" />
+      </list>
+    </option>
+  </component>
 </module>
