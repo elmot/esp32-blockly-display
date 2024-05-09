@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <title>14-Segment Control</title>
     <!-- Load Blockly core -->
-    <script src="./blockly/blockly_compressed.js"></script>
+    <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
     <!-- Load the default blocks -->
-    <script src="./blockly/blocks_compressed.js"></script>
-    <!-- Load a generators -->
-    <script src="./blockly/javascript_compressed.js"></script>
+    <script src="https://unpkg.com/blockly/blocks_compressed.js"></script>
+    <!-- Load a generator -->
+    <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
     <!-- Load a message file -->
-    <script src="./blockly/msg/en.js"></script>
+    <script src="https://unpkg.com/blockly/msg/en.js"></script>    <!-- Load Blockly core -->
     <!--    MQTT CLIENT-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"
             type="text/javascript"></script>
@@ -56,7 +56,6 @@
 </head>
 <body>
 <div id="blocklyDiv" style="height: 95cqh; width: 95cqw;"></div>
-<!-- todo make normal <button id="save">Save</button>-->
 <div id="displayDiv">
     <div id="connect-circle">
         <div id="connect-tooltip">Connecting...</div>
@@ -84,8 +83,10 @@
     };
     const workspace = Blockly.inject("blocklyDiv", config);
     workspace.addChangeListener(function (event) {
-            if (event.type === Blockly.Events.BLOCK_CHANGE)
-                eval(javascript.javascriptGenerator.workspaceToCode(workspace))
+            if (event.type === Blockly.Events.BLOCK_CHANGE) {
+                const js = javascript.javascriptGenerator.workspaceToCode(workspace)
+                segm14StartScript(js)
+            }
         }
     )
     //todo display stuff led
@@ -105,7 +106,8 @@
         MqttClient.save(button.info.file_key, JSON.stringify(state))
     })
 
-    MqttClient.start()
+    // MqttClient.start()
+
 </script>
 
 </html>

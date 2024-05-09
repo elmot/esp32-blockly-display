@@ -66,7 +66,7 @@ Blockly.Blocks["sleep"] = {
 javascript.javascriptGenerator.forBlock["sleep"] = function (block, generator) {
     let time = generator.valueToCode(block, "SECONDS", javascript.Order.ATOMIC);
     if (time === "") time = 0
-    return `segm14Delay(${time})\n`
+    return `await segm14Delay(${time})\n`
 }
 
 Blockly.Blocks["led_14_segments_text"] = {

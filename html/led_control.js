@@ -96,10 +96,41 @@ const font = {
     'Б': 'EFACDGH',
     'Ю': 'EFBCGKL',
 };
+
+
+var stopMe = false
+var runningTimeout = null
+
+function segm14Stop()
+{
+    stopMe = true
+    clearTimeout(runningTimeout)
+}
+
+function segm14StartScript(js) {
+    segm14Stop()
+    const f = (async ()=>{}).constructor(js)
+    setTimeout(() => {
+        stopMe = false
+        f()
+    })
+}
 // noinspection JSUnusedGlobalSymbols
 function segm14Text(text) {
+    if(stopMe) {
+        return
+    }
     for (let i = 0; i < 4; i++) {
         const shape = font[text.charAt(i)]
         segm14Output(i, shape === undefined ? "" : shape)
     }
 }
+
+// noinspection JSUnusedGlobalSymbols
+function segm14Delay(ms) {
+    if(stopMe) {
+        return null
+    }
+    return new Promise(resolve => runningTimeout = setTimeout(resolve, ms * 1000.0));
+}
+
