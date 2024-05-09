@@ -99,31 +99,31 @@ const font = {
 };
 
 
-var stopMe = false
-var runningTimeout = null
-
-function segm14Stop()
-{
-    stopMe = true
-    clearTimeout(runningTimeout)
-}
 
 function segm14StartScript() {
-    const js = javascript.javascriptGenerator.workspaceToCode(workspace)
-    segm14Stop()
-    segm14Text("\s\s\s\s")
-    const f = (async ()=>{}).constructor(js)
-    setTimeout(() => {
-        stopMe = false
-        f()
-    })
-}
-// noinspection JSUnusedGlobalSymbols
-function segm14Text(text) {
-    if(stopMe) {
+    if(this!==window) {
+        segm14StartScript.call(window)
         return
     }
+    window.stopMe = true
+    clearTimeout(window.runningTimeout)
+    const js = javascript.javascriptGenerator.workspaceToCode(workspace)
+    segm14Text("\s\s\s\s")
+    //Tricky stuff: here we create an async function using browser internal constructor
+    const f = (async () => {
+    }).constructor(js)
+    setTimeout(() => {
+        window.stopMe = false
+        f()
+    },100)
+}
+
+// noinspection JSUnusedGlobalSymbols
+function segm14Text(text) {
     for (let i = 0; i < 4; i++) {
+        if (window.stopMe) {
+            return
+        }
         const shape = font[text.charAt(i)]
         segm14Output(i, shape === undefined ? "" : shape)
     }
@@ -131,9 +131,11 @@ function segm14Text(text) {
 
 // noinspection JSUnusedGlobalSymbols
 function segm14Delay(ms) {
-    if(stopMe) {
+    if (window.stopMe) {
         return null
     }
-    return new Promise(resolve => runningTimeout = setTimeout(resolve, ms * 1000.0));
+    return new Promise(resolve => {
+        if (!window.stopMe) window.runningTimeout = setTimeout(resolve, ms * 1000.0)
+    });
 }
 
