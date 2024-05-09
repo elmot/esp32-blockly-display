@@ -44,7 +44,7 @@ const MqttClient = {
         this.setConnectStatus(this.CONNECTING_COLOR, "Connecting to MQTT")
 
         // Create a client instance
-        this.client = new Paho.MQTT.Client("broker.emqx.io", 8084, "/mqtt", "mqtt_cl1");
+        this.client = new Paho.MQTT.Client("broker.emqx.io", 8084, "/mqtt", "elmot-toy-webpage" + Math.random());
 
         // set callback handlers
         this.client.onConnectionLost = (e) => MqttClient.onConnectionLost.call(MqttClient, e);
