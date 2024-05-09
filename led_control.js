@@ -53,6 +53,7 @@ const font = {
     '+': 'GJHM',
     '-': 'GH',
     '=': 'DGH',
+    '~': 'A',
     '_': 'D',
     '[': 'EFAD',
     ']': 'ABCD',
@@ -107,8 +108,10 @@ function segm14Stop()
     clearTimeout(runningTimeout)
 }
 
-function segm14StartScript(js) {
+function segm14StartScript() {
+    const js = javascript.javascriptGenerator.workspaceToCode(workspace)
     segm14Stop()
+    segm14Text("\s\s\s\s")
     const f = (async ()=>{}).constructor(js)
     setTimeout(() => {
         stopMe = false

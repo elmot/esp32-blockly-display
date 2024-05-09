@@ -226,5 +226,18 @@ const toolbox = {
         fileCategory("Beta"),
         fileCategory("Gamma"),
         fileCategory("Delta"),
+        {
+            kind: "sep"
+        },
+        {
+            kind: "category",
+            name: "Examples",
+            colour: 350,
+            contents: [
+                {kind: "button", text: "Propeller", file_key: name, callbackKey: "example-propeller"},
+                {kind: "button", text: "Kaboom", file_key: name, callbackKey: "example-kaboom"},
+            ]
+        },
+
     ],
 };

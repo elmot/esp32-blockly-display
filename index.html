@@ -20,6 +20,7 @@
     <script src="toolbox.js"></script>
     <script src="led_control.js"></script>
     <script src="comm.js"></script>
+    <script src="examples.js"></script>
     <style>
         #displayDiv {
             padding: 2cqh;
@@ -85,13 +86,13 @@
     const workspace = Blockly.inject("blocklyDiv", config);
     workspace.addChangeListener(function (event) {
             if (event.type === Blockly.Events.BLOCK_CHANGE) {
-                const js = javascript.javascriptGenerator.workspaceToCode(workspace)
-                segm14StartScript(js)
+                segm14StartScript()
             }
         }
     )
     //todo display stuff led
     //todo save/restore
+    //todo rerun
     document.getElementById("digit0").src = led14Svg
     document.getElementById("digit1").src = led14Svg
     document.getElementById("digit2").src = led14Svg
@@ -106,7 +107,7 @@
         const state = Blockly.serialization.workspaces.save(workspace);
         MqttClient.save(button.info.file_key, JSON.stringify(state))
     })
-
+    EXAMPLES.init(workspace)
     // MqttClient.start()
 
 </script>
