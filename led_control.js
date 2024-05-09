@@ -105,10 +105,10 @@ function segm14StartScript() {
         segm14StartScript.call(window)
         return
     }
+    segm14Text("\s\s\s\s")
     window.stopMe = true
     clearTimeout(window.runningTimeout)
     const js = javascript.javascriptGenerator.workspaceToCode(workspace)
-    segm14Text("\s\s\s\s")
     //Tricky stuff: here we create an async function using browser internal constructor
     const f = (async () => {
     }).constructor(js)

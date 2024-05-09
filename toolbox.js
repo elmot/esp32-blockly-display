@@ -3,9 +3,8 @@ function fileCategory(name) {
         kind:"category",
         name:name,
         contents: [
-            {kind:"button",text:"Run",file_key:name,callbackKey: "file-run"},
-            {kind:"button",text:"Load",file_key:name,callbackKey: "file-load"},
-            {kind:"button",text:"Save",file_key:name,callbackKey: "file-save"}
+            {kind:"button",text:"Load",file_key:name,callbackKey: "file-load", "web-class":"LoadButton"},
+            {kind:"button",text:"Save",file_key:name,callbackKey: "file-save", "web-class":"SaveButton"}
         ]
     }
 }
@@ -222,10 +221,17 @@ const toolbox = {
         {
             kind: "sep"
         },
-        fileCategory("Alpha"),
-        fileCategory("Beta"),
-        fileCategory("Gamma"),
-        fileCategory("Delta"),
+        {
+            kind: "category",
+            name: "Files",
+            contents: [
+                fileCategory("Alpha"),
+                fileCategory("Beta"),
+                fileCategory("Gamma"),
+                fileCategory("Delta"),
+            ]
+
+        },
         {
             kind: "sep"
         },

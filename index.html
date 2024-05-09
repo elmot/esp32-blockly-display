@@ -32,11 +32,14 @@
             border-radius: 1cqw;
             display: flex;
             align-items: center;
+            user-select: none;
         }
 
         #displayDiv embed {
             height: 12cqh;
-            width: 7cqw
+            width: 7cqw;
+            user-select: none;
+            pointer-events: none;
         }
 
         #displayDiv #restart img {
@@ -61,14 +64,20 @@
             visibility: visible;
             background-color: antiquewhite;
         }
+        .LoadButton  .blocklyFlyoutButtonBackground {
+            fill: #236123;
+        }
+        .SaveButton  .blocklyFlyoutButtonBackground {
+            fill: #682714;
+        }
     </style>
 </head>
 <body>
 <div id="blocklyDiv" style="height: 95cqh; width: 95cqw;"></div>
 <div id="displayDiv">
-<!--    <div id="connect-circle">-->
-<!--        <div id="connect-tooltip">Connecting...</div>-->
-<!--    </div>-->
+    <!--    <div id="connect-circle">-->
+    <!--        <div id="connect-tooltip">Connecting...</div>-->
+    <!--    </div>-->
     <button id="restart" title="Restart">
         <img src="restart-svgrepo-com.svg">
     </button>
@@ -97,30 +106,62 @@
     const CHANGE_EVENTS = new Set([Blockly.Events.BLOCK_CHANGE, Blockly.Events.BLOCK_CREATE, Blockly.Events.BLOCK_DELETE, Blockly.Events.BLOCK_MOVE])
     workspace.addChangeListener(function (event) {
             if (CHANGE_EVENTS.has(event.type)) {
+                window.workspace_changed = true
                 segm14StartScript()
             }
         }
     )
     //todo display stuff led
-    //todo save/restore
     document.getElementById("digit0").src = led14Svg
     document.getElementById("digit1").src = led14Svg
     document.getElementById("digit2").src = led14Svg
     document.getElementById("digit3").src = led14Svg
-    workspace.registerButtonCallback("file-run", function (button) {
-        alert(button.info.file_key)
-    })
     workspace.registerButtonCallback("file-load", function (button) {
-        MqttClient.load(button.info.file_key)
+        const js = window.localStorage.getItem(`local-file:${button.info.file_key}`)
+        if (js != null) {
+            if (window.workspace_changed && confirm(`Unsaved workspace, load file ${button.info.file_key} anyway?`)) {
+                Blockly.serialization.workspaces.load(JSON.parse(js), workspace);
+                window.workspace_changed = false
+            }
+        } else {
+            alert(`Nothing saved to file ${button.info.file_key}`)
+        }
+
     })
     workspace.registerButtonCallback("file-save", function (button) {
-        const state = Blockly.serialization.workspaces.save(workspace);
-        MqttClient.save(button.info.file_key, JSON.stringify(state))
+        if (confirm(`Save to file ${button.info.file_key}?`)) {
+            const js = JSON.stringify(Blockly.serialization.workspaces.save(workspace));
+            window.localStorage.setItem(`local-file:${button.info.file_key}`, js)
+            window.workspace_changed = false
+        }
     })
     EXAMPLES.init(workspace)
-    document.getElementById("restart").addEventListener("click", function() {
+    document.getElementById("restart").addEventListener("click", function () {
         segm14StartScript()
     });
+
+    {
+        const QUICKSAVE_KEY = "local-file:quicksave"
+        const js = window.localStorage.getItem(QUICKSAVE_KEY)
+        if (js != null) {
+            setTimeout(() => {
+                try {
+                    Blockly.serialization.workspaces.load(JSON.parse(js), workspace);
+                } catch (e) {
+                    console.warn(e)
+                }
+            }, 100)
+        }
+        setInterval(() => {
+            try {
+                const js = JSON.stringify(Blockly.serialization.workspaces.save(workspace));
+                window.localStorage.setItem(QUICKSAVE_KEY, js)
+                console.info("Quick save")
+            } catch (e) {
+                console.warn(e)
+            }
+        }, 30000)
+    }
     // MqttClient.start()
 
 </script>

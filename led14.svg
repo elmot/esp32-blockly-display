@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 329 444" enable-background="new 0 0 329 444">
+    <g id="Layer_1">
+        <g>
+            <polygon fill="#F0F0F0" points="109.3,30.5 91.8,12 104.2,0.5 306.8,0.5 315.3,9 288.9,31.5"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="264.6,200.9 296.5,38.3 319,16.7 328.5,28.1 295.6,197.7 277.1,215.3"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="227.6,407.8 255.5,245.2 273.1,226.7 287.5,240.2 257.6,414.7 244.1,426.3"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="22.7,443 15.3,435.5 38.7,414 218.8,413.5 237.3,432 225.8,442.5"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="0.6,416.8 33.5,245.3 53,227.7 65.5,243.1 34.6,404.7 10.1,426.3"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="42.6,198.9 72.5,28.2 84,15.7 102.5,36.2 73.6,198.7 55.1,215.3"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="72.8,237 60.2,221.6 76.7,207 140.4,207 157.7,220.4 129.4,237"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="190.7,237 172.4,221.6 197.7,207 257.3,207 268.8,219.5 249.3,237"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="140.5,200.7 99.6,88 107.4,42.1 125.6,63.3 154.5,152.1 161.4,217.8"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="160.5,150 182.5,36.2 216.5,36.2 193.6,152.8 165.4,209.2"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="207.5,138.2 257.4,69.3 287.3,43.3 279.6,88.8 201.7,197.6 169.2,215.8"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="204.5,377.8 174.5,291.9 168.6,226.2 186.6,241.3 229.5,357.1 223.7,401.8"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="115.6,405.9 134.5,293.1 162.7,231.9 167.5,285 147.6,405.9"/>
+        </g>
+        <g>
+            <polygon fill="#F0F0F0" points="50.5,352.2 128.4,243.4 159.9,225.2 124.6,299.8 71.7,373.7 43.7,398.7"/>
+        </g>
+        <g>
+            <circle fill="#F0F0F0" cx="296.5" cy="426.5" r="16.5"/>
+        </g>
+    </g>
+    <g id="Layer_2">
+        <text transform="matrix(1 0 0 1 195.5767 24.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">A</text>
+        <text transform="matrix(1 0 0 1 288.5767 126.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">B</text>
+        <text transform="matrix(1 0 0 1 249.5767 338.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">C</text>
+        <text transform="matrix(1 0 0 1 117.5767 436.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">D</text>
+        <text transform="matrix(1 0 0 1 25.5767 338.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">E</text>
+        <text transform="matrix(1 0 0 1 63.5767 126.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">F</text>
+        <text transform="matrix(1 0 0 1 96.5767 230.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">G</text>
+        <text transform="matrix(1 0 0 1 211.377 230.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">H</text>
+        <text transform="matrix(1 0 0 1 126.377 151.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">I</text>
+        <text transform="matrix(1 0 0 1 170.377 117.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">J</text>
+        <text transform="matrix(1 0 0 1 212.377 151.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">K</text>
+        <text transform="matrix(1 0 0 1 180 303.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">L</text>
+        <text transform="matrix(1 0 0 1 135 335.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">M</text>
+        <text transform="matrix(1 0 0 1 99.5767 303.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">N</text>
+        <text transform="matrix(1 0 0 1 290 435.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">O</text>
+    </g>
+</svg>
