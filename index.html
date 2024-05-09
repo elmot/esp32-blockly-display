@@ -33,19 +33,23 @@
                 border: darkslategrey 3px dashed;
                 border-radius: 1cqw;
                 padding: 2cqh;
+                display: flex;
+                align-items: center;
                 user-select: none;
             }
-
+            #connectDiv {
+                grid-gap: 0.6cqw;
+                align-items: start;
+                 *:last-child {
+                    margin-left: auto;
+                }
+            }
             img, embed {
                 height: 3cqmax;
                 width: 3cqmax;
             }
         }
 
-        #displayDiv {
-            display: flex;
-            align-items: center;
-        }
 
         #displayDiv embed {
             height: 12cqh;
@@ -194,6 +198,15 @@
 
     document.getElementById("restart-board").addEventListener("click", function () {
         MqttClient.restartPython()
+    });
+
+    document.getElementById("settings-board").addEventListener("click", function () {
+        const s = window.prompt("Please enter communication MQTT_TOKEN from secrets.py", MqttClient.mqttToken)
+        if(s !== null) {
+            window.localStorage.setItem("MQTT_TOKEN", s)
+            window.location.reload()
+        }
+
     });
 
 

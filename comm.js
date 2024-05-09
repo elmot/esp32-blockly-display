@@ -3,12 +3,20 @@ const MqttClient = {
     CONNECTED_COLOR: "darkgreen",
     CONNECTION_ERROR_COLOR: "darkred",
     WAIT_FOR_BOARD_COLOR: "lightblue",
-    start: function () {
-        this.connect()
-    },
-    mqttToken: "aaa3c72f-8e9e-40a4-b937-caf1c384e15b",
+
+    mqttToken: "aaa3c72f-8e9e-40a4-b937-caf1c384e15",
     keepAliveTimeout: null,
     pingTimeout: null,
+
+    start: function () {
+        const s = window.localStorage.getItem("MQTT_TOKEN")
+        if(s != null) {
+            this.mqttToken = s;
+        }
+        this.connect()
+    },
+
+
     setConnectStatus: function (color, tooltip) {
         console.log(`MQTT: ${tooltip}`)
         const img = document.getElementById("connect-indicator");
