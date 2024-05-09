@@ -17,6 +17,13 @@ javascript.javascriptGenerator.forBlock["led_14_segments"] = function (block, ge
     return `segm14Output(${pos},${segsCode})\n`
 }
 
+python.pythonGenerator.forBlock["led_14_segments"] = function (block, generator) {
+    const pos = block.getFieldValue("POS");
+    let segsCode = generator.valueToCode(block, "SEGS", javascript.Order.ATOMIC);
+    if (segsCode === "") segsCode = "''"
+    return `segm14_output(${pos},${segsCode})\n`
+}
+
 Blockly.Blocks["sleep"] = {
     init: function () {
         this.setColour(160);
@@ -31,6 +38,12 @@ javascript.javascriptGenerator.forBlock["sleep"] = function (block, generator) {
     let time = generator.valueToCode(block, "SECONDS", javascript.Order.ATOMIC);
     if (time === "") time = 0
     return `await segm14Delay(${time})\n`
+}
+
+python.pythonGenerator.forBlock["sleep"] = function (block, generator) {
+    let time = generator.valueToCode(block, "SECONDS", javascript.Order.ATOMIC);
+    if (time === "") time = 0
+    return `segm14_delay(${time})\n`
 }
 
 Blockly.Blocks["led_14_segments_text"] = {
@@ -51,5 +64,11 @@ javascript.javascriptGenerator.forBlock["led_14_segments_text"] = function (bloc
     let text = generator.valueToCode(block, "TEXT", javascript.Order.ATOMIC);
     if (text === "") text = "''"
     return `segm14Text(${text})\n`
+}
+
+python.pythonGenerator.forBlock["led_14_segments_text"] = function (block, generator) {
+    let text = generator.valueToCode(block, "TEXT", javascript.Order.ATOMIC);
+    if (text === "") text = "''"
+    return `segm14_text(${text})\n`
 }
 

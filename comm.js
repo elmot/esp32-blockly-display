@@ -2,45 +2,49 @@ const MqttClient = {
     CONNECTING_COLOR: "darkyellow",
     CONNECTED_COLOR: "darkgreen",
     CONNECTION_ERROR_COLOR: "darkred",
-    WAIT_FOR_BOARD_COLOR: "blue",
+    WAIT_FOR_BOARD_COLOR: "lightblue",
     start: function () {
         this.connect()
     },
-
+    mqttToken: "aaa3c72f-8e9e-40a4-b937-caf1c384e15b",
+    keepAliveTimeout: null,
+    pingTimeout: null,
+    setConnectStatus: function (color, tooltip) {
+        console.log(`MQTT: ${tooltip}`)
+        const img = document.getElementById("connect-indicator");
+        img.querySelector("title").innerHTML = tooltip
+        img.querySelector("g").style.fill = color
+    },
     onConnect: function () {
-        document.getElementById("connect-circle").style.backgroundColor = MqttClient.WAIT_FOR_BOARD_COLOR
-        document.getElementById("connect-tooltip").innerText = `Connected`
-        this.client.subscribe("/editor/#", 1)
-        const msg = new Paho.MQTT.Message("Connect");
-        msg.destinationName = "/board"
-        this.client.send(msg)
+        this.setConnectStatus(this.WAIT_FOR_BOARD_COLOR, "Connected to MQTT")
+        this.client.subscribe(`/${this.mqttToken}/keepalive`, 1)
     },
 
     onConnectionLost: function (e) {
         MqttClient.onConnectionError(e)
+        clearInterval(this.pingTimeout)
         window.setTimeout(() => {
             MqttClient.connect.call(MqttClient)
         }, 1000)
     },
 
     onConnectionError: function (e) {
-        const msg = `MQTT error: ${e.errorMessage} (${e.errorCode})`
-        document.getElementById("connect-circle").style.backgroundColor = this.CONNECTION_ERROR_COLOR
-        document.getElementById("connect-tooltip").innerHTML = msg
+        this.setConnectStatus(this.CONNECTION_ERROR_COLOR, `MQTT error: ${e.errorMessage} (${e.errorCode})`)
     },
     onMessageArrived: function (msg) {
-        document.getElementById("connect-circle").style.backgroundColor = this.CONNECTED_COLOR
-        if(msg.destinationName.startsWith("/load/")) {
-            Blockly.serialization.workspaces.load(JSON.parse(msg.payloadMessage), workspace);
-        }
+        this.setConnectStatus(this.CONNECTED_COLOR, "Connected")
+        clearTimeout(this.keepAliveTimeout)
+        this.keepAliveTimeout = setTimeout(() => {
+            this.setConnectStatus(this.WAIT_FOR_BOARD_COLOR, "Board timeout")
+        }, 10000)
     },
     client: null,
     connect: function () {
 
-        document.getElementById("connect-circle").style.backgroundColor = this.CONNECTING_COLOR
-        document.getElementById("connect-tooltip").innerText = `Connected`
+        this.setConnectStatus(this.CONNECTING_COLOR, "Connecting to MQTT")
+
         // Create a client instance
-        this.client = new Paho.MQTT.Client("53b5babd8076408f85e05e65cbfff0ee.s1.eu.hivemq.cloud", 8884, "/mqtt", "mqtt_cl1");
+        this.client = new Paho.MQTT.Client("broker.emqx.io", 8084, "/mqtt", "mqtt_cl1");
 
         // set callback handlers
         this.client.onConnectionLost = (e) => MqttClient.onConnectionLost.call(MqttClient, e);
@@ -51,22 +55,20 @@ const MqttClient = {
             {
                 onSuccess: () => this.onConnect.call(MqttClient),
                 onFailure: (e) => this.onConnectionError.call(MqttClient, e),
-                userName: "jsbot1",
-                password: "Genius11",
                 cleanSession: true,
                 useSSL: true,
             });
     },
-    save: function(key,json) {
-        const msg = new Paho.MQTT.Message(json)
-        msg.retained = true
-        msg.destinationName = `/save/${key}`
+    restartPython: function() {
+        const msg = new Paho.MQTT.Message("rst");
+        msg.destinationName = `/${this.mqttToken}/python/restart`
+        console.info(`Sendind message to ${msg.destinationName}`)
         this.client.send(msg)
     },
-    load: function(key) {
-        const msg = new Paho.MQTT.Message(key)
-        msg.destinationName = `/request-load`
-        document.getElementById("connect-circle").style.backgroundColor = this.WAIT_FOR_BOARD_COLOR
+    executePython: function(js) {
+        const msg = new Paho.MQTT.Message(js);
+        msg.destinationName = `/${this.mqttToken}/python/run`
+        console.info(`Sendind message to ${msg.destinationName}`)
         this.client.send(msg)
     }
 }
