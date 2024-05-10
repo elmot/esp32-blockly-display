@@ -8,8 +8,8 @@
     </facet>
   </component>
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$/micropython/lib/mqtt" />
-    <content url="file://$MODULE_DIR$/micropython/src">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/micropython/lib/mqtt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/micropython/src" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.11 (esp32-blockly-display)" jdkType="Python SDK" />
@@ -20,12 +20,5 @@
   <component name="PyDocumentationSettings">
     <option name="format" value="PLAIN" />
     <option name="myDocStringFormat" value="Plain" />
-  </component>
-  <component name="PyNamespacePackagesService">
-    <option name="namespacePackageFolders">
-      <list>
-        <option value="$MODULE_DIR$/micropython/lib/mqtt/umqtt" />
-      </list>
-    </option>
   </component>
 </module>
