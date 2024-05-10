@@ -23,44 +23,53 @@
     <script src="comm.js"></script>
     <script src="examples.js"></script>
     <style>
-        #indicatorsDiv {
-            position: absolute;
-            right: 5cqw;
-            top: 5cqh;
-
-            > div {
-                background-color: #f8f8f8;
-                border: darkslategrey 3px dashed;
-                border-radius: 1cqw;
-                padding: 2cqh;
-                display: flex;
-                align-items: center;
-                user-select: none;
-            }
-            #connectDiv {
-                grid-gap: 0.6cqw;
-                align-items: start;
-                 *:last-child {
-                    margin-left: auto;
-                }
-            }
-            img, embed {
-                height: 3cqmax;
-                width: 3cqmax;
-            }
+        #blocklyDiv {
+            height: 95dvh
         }
 
+        #indicatorsDiv {
+            position: absolute;
+            right: 5dvw;
+            top: 5dvh;
+        }
+
+        #indicatorsDiv img, embed {
+            height: 3dvmax;
+            width: 3dvmax;
+        }
+
+        #indicatorsDiv > div {
+            background-color: #f8f8f8;
+            border: darkslategrey 3px dashed;
+            border-radius: 1dvw;
+            padding: 2dvh;
+            display: flex;
+            user-select: none;
+        }
+
+        #connectDiv {
+            grid-gap: 0.6dvw;
+            align-items: start;
+        }
+
+        #connectDiv *:last-child {
+            margin-left: auto;
+        }
+
+        #displayDiv {
+            align-items: end;
+        }
 
         #displayDiv embed {
-            height: 12cqh;
-            width: 7cqw;
+            height: 12dvh;
+            width: 7dvw;
             user-select: none;
             pointer-events: none;
         }
 
         #settings-board img {
-            height: 1.5cqmax;
-            width: 1.5cqmax;
+            height: 1.5dvmax;
+            width: 1.5dvmax;
         }
 
         /*noinspection CssUnusedSymbol*/
@@ -75,22 +84,22 @@
     </style>
 </head>
 <body>
-<div id="blocklyDiv" style="height: 95cqh; width: 95cqw;"></div>
+<div id="blocklyDiv"></div>
 <div id="indicatorsDiv">
     <div id="displayDiv">
-        <button id="restart" title="Restart">
-            <img src="restart-svgrepo-com.svg">
-        </button>
         <embed type="image/svg+xml" id="digit0">
         <embed type="image/svg+xml" id="digit1">
         <embed type="image/svg+xml" id="digit2">
         <embed type="image/svg+xml" id="digit3">
+        <button id="restart" title="Restart">
+            <img src="restart-svgrepo-com.svg">
+        </button>
     </div>
     <div id="connectDiv">
-        <svg id="connect-indicator" width="3cqmax" height="3cqmax" viewBox="0 0 32 32" fill="none">
+        <svg id="connect-indicator" width="3dvmax" height="3dvmax" viewBox="0 0 32 32" fill="none">
             <title>Connecting</title>
             <g>
-                <path  d="M15.631,24.833l-3.649-3.717c-0.194-0.197-0.201-0.527,0.005-0.712C13.04,19.456,14.448,19,16,19
+                <path d="M15.631,24.833l-3.649-3.717c-0.194-0.197-0.201-0.527,0.005-0.712C13.04,19.456,14.448,19,16,19
 		s2.96,0.456,4.014,1.405c0.206,0.185,0.198,0.514,0.005,0.712l-3.649,3.717C16.173,25.056,15.827,25.056,15.631,24.833z M16,13
 		c-3.06,0-5.845,1.074-7.944,2.982c-0.198,0.18-0.208,0.491-0.031,0.691l1.958,2.219c0.186,0.21,0.502,0.216,0.709,0.026
 		C12.093,17.635,13.955,17,16,17c2.045,0,3.907,0.635,5.309,1.918c0.207,0.189,0.523,0.184,0.709-0.026l1.958-2.219
@@ -202,14 +211,12 @@
 
     document.getElementById("settings-board").addEventListener("click", function () {
         const s = window.prompt("Please enter communication MQTT_TOKEN from secrets.py", MqttClient.mqttToken)
-        if(s !== null) {
+        if (s !== null) {
             window.localStorage.setItem("MQTT_TOKEN", s)
             window.location.reload()
         }
 
     });
-
-
 </script>
 
 </html>
