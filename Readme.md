@@ -23,6 +23,7 @@ Software & SaaS services
 * [EMQ Free Public MQTT Broker](https://broker.emqx.io) helps to exchange data between web- and hardware- part
 * [MicroPython](https://micropython.org/) is run on the ESP32 MCU and handles both the display and MQTT connection
 * [HT16K33 Python driver](https://github.com/smittytone/HT16K33-Python)
+* [micropython-mqtt](https://github.com/peterhinch/micropython-mqtt)
 
 On-board led statuses
 ----
