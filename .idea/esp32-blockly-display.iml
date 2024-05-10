@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="CPP_MODULE" version="4">
+<module type="PYTHON_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="MicroPython" name="MicroPython">
+      <configuration>
+        <device name="ESP8266" />
+      </configuration>
+    </facet>
+  </component>
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
-    <orderEntry type="inheritedJdk" />
+    <content url="file://$MODULE_DIR$/micropython/lib/mqtt" />
+    <content url="file://$MODULE_DIR$/micropython/src">
+      <sourceFolder url="file://$MODULE_DIR$/micropython/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.11 (esp32-blockly-display)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="paho-mqtt" level="application" />
-    <orderEntry type="library" name="mqtt" level="application" />
+    <orderEntry type="library" name="MicroPython" level="project" />
+    <orderEntry type="library" name="blockly" level="application" />
+  </component>
+  <component name="PyDocumentationSettings">
+    <option name="format" value="PLAIN" />
+    <option name="myDocStringFormat" value="Plain" />
   </component>
   <component name="PyNamespacePackagesService">
     <option name="namespacePackageFolders">
       <list>
-        <option value="$MODULE_DIR$/micropython/lib/mqtt" />
-        <option value="$MODULE_DIR$/micropython/src" />
+        <option value="$MODULE_DIR$/micropython/lib/mqtt/umqtt" />
       </list>
     </option>
   </component>

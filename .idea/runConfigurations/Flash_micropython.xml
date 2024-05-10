@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Flash micropython" type="MicroPythonConfigurationType" factoryName="MicroPython" nameIsGenerated="true" path="D:\projects\esp32-blockly-display\micropython\src" runReplOnSuccess="no">
+    <module name="esp32-blockly-display" />
+    <method v="2">
+      <option name="MicroPython.StopREPL.Before.Run" enabled="true" />
+    </method>
+  </configuration>
+</component>

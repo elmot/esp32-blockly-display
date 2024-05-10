@@ -14,7 +14,8 @@ Hardware
 
 Software & SaaS services
 ----
-
+* [PyCharm](https://www.jetbrains.com/pycharm/) 
+* [MicroPython plugin](https://plugins.jetbrains.com/plugin/9777-micropython)
 * [Google Blockly](https://developers.google.com/blockly) is used to edit and run display programs online.
    * The blocks are converted to JavaScript code to be run in the browser window
    * The blocks are converted to MicroPython code to be run on MCU side
