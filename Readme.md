@@ -44,7 +44,7 @@ How2Run
 * Flash latest [MicroPython](https://micropython.org/download/ESP32_GENERIC_C3/) to the MCU module. 
 [JS ESPTool](https://espressif.github.io/esptool-js/) is a handy tool for it. 
 Note that *.bin* file should be flashed at address *0x0000*
-* Write your own *secrets.py* file based on the template [secrets_template.py](micropython/src/secrets_template.py).
+* Write your own *secrets.py* file based on the template [secrets_template.py](micropython/src/SECRETS_template.py).
 There should be your specific Wi-Fi SSID, Wi-Fi password, and a random UUID as a MQTT connection token. 
 * Upload newly created *secrets.py* to the MCU module filesystem. 
 You may use either 
