@@ -17,6 +17,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"
             type="text/javascript"></script>
 
+    <script src="SECRETS.js"></script>
+
     <script src="led14_segment_blocks.js"></script>
     <script src="toolbox.js"></script>
     <script src="led_control.js"></script>
@@ -145,7 +147,7 @@
             }
         }
     )
-    //todo display stuff led
+    //todo MQTT parameters dialog
     document.getElementById("digit0").src = led14Svg
     document.getElementById("digit1").src = led14Svg
     document.getElementById("digit2").src = led14Svg

@@ -4,7 +4,6 @@ const MqttClient = {
     CONNECTION_ERROR_COLOR: "darkred",
     WAIT_FOR_BOARD_COLOR: "lightblue",
 
-    mqttToken: "aaa3c72f-8e9e-40a4-b937-caf1c384e15",
     keepAliveTimeout: null,
     pingTimeout: null,
 
@@ -25,7 +24,7 @@ const MqttClient = {
     },
     onConnect: function () {
         this.setConnectStatus(this.WAIT_FOR_BOARD_COLOR, "Connected to MQTT")
-        this.client.subscribe(`/${this.mqttToken}/keepalive`, 1)
+        this.client.subscribe(`/keepalive`, 1)
     },
 
     onConnectionLost: function (e) {
@@ -52,7 +51,7 @@ const MqttClient = {
         this.setConnectStatus(this.CONNECTING_COLOR, "Connecting to MQTT")
 
         // Create a client instance
-        this.client = new Paho.MQTT.Client("broker.emqx.io", 8084, "/mqtt", "elmot-toy-webpage" + Math.random());
+        this.client = new Paho.MQTT.Client(SECRETS.MQTT_HOST, SECRETS.MQTT_PORT,  "/mqtt", "elmot-toy-webpage" + Math.random());
 
         // set callback handlers
         this.client.onConnectionLost = (e) => MqttClient.onConnectionLost.call(MqttClient, e);
@@ -64,18 +63,20 @@ const MqttClient = {
                 onSuccess: () => this.onConnect.call(MqttClient),
                 onFailure: (e) => this.onConnectionError.call(MqttClient, e),
                 cleanSession: true,
-                useSSL: true,
+                useSSL: SECRETS.MQTT_SSL,
+                userName: SECRETS.MQTT_USER,
+                password: SECRETS.MQTT_PASSWORD,
             });
     },
     restartPython: function() {
         const msg = new Paho.MQTT.Message("rst");
-        msg.destinationName = `/${this.mqttToken}/python/restart`
+        msg.destinationName = `/python/restart`
         console.info(`Sendind message to ${msg.destinationName}`)
         this.client.send(msg)
     },
     executePython: function(js) {
         const msg = new Paho.MQTT.Message(js);
-        msg.destinationName = `/${this.mqttToken}/python/run`
+        msg.destinationName = `/python/run`
         console.info(`Sendind message to ${msg.destinationName}`)
         this.client.send(msg)
     }

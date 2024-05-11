@@ -5,3 +5,4 @@ cmake-build*/
 *.zip
 blockly.src/
 *.bin
+SECRETS.js
