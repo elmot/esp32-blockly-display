@@ -17,8 +17,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"
             type="text/javascript"></script>
 
-    <script src="SECRETS.js"></script>
-
     <script src="led14_segment_blocks.js"></script>
     <script src="toolbox.js"></script>
     <script src="led_control.js"></script>
@@ -83,6 +81,33 @@
         .SaveButton .blocklyFlyoutButtonBackground {
             fill: #682714;
         }
+
+        dialog {
+            border-radius: 1em;
+        }
+
+        dialog * {
+            font-size: larger;
+            margin: 0 1em;
+        }
+
+        #dialog-mqtt-params div {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-row-gap: 1em;
+        }
+
+        #dialog-mqtt-params div *:first-child {
+            grid-column: span 2;
+        }
+
+        input:invalid {
+            box-shadow: 0 0 5px 1px red;
+        }
+
+        input:focus:invalid {
+            box-shadow: none;
+        }
     </style>
 </head>
 <body>
@@ -122,6 +147,44 @@
         </button>
     </div>
 </div>
+<dialog id="dialog-alert">
+    <div id="dialog-alert-msg"></div>
+    <br>
+    <button id="dialog-alert-ok">OK</button>
+</dialog>
+<dialog id="dialog-confirm">
+    <div id="dialog-confirm-msg"></div>
+    <br>
+    <button id="dialog-confirm-ok">OK</button>
+    <button id="dialog-confirm-cancel">Cancel</button>
+</dialog>
+<dialog id="dialog-prompt">
+    <label for="dialog-prompt-input" id="dialog-prompt-msg"></label>
+    <br>
+    <br>
+    <input type="text" id="dialog-prompt-input">
+    <br>
+    <br>
+    <button id="dialog-prompt-ok">OK</button>
+    <button id="dialog-prompt-cancel">Cancel</button>
+</dialog>
+<dialog id="dialog-mqtt-params">
+    <div>
+        <h2>Please set MQTT connection params</h2>
+        <label for="dialog-mqtt-host">Broker host:</label>
+        <input type="text" id="dialog-mqtt-host" placeholder="blah.blah.hivemq.cloud" required>
+        <label for="dialog-mqtt-port">Broker Websocket/TLS port:</label>
+        <input type="number" id="dialog-mqtt-port" min="80" max="65535" required>
+        <label for="dialog-mqtt-path">Broker path</label>
+        <input type="text" id="dialog-mqtt-path" required>
+        <label for="dialog-mqtt-user">User</label>
+        <input type="text" id="dialog-mqtt-user" required>
+        <label for="dialog-mqtt-password">Password</label>
+        <input type="password" id="dialog-mqtt-password" required minlength="8">
+        <button id="dialog-mqtt-ok">OK</button>
+        <button id="dialog-mqtt-cancel">Cancel</button>
+    </div>
+</dialog>
 </body>
 <script>
     const config = {
@@ -147,7 +210,6 @@
             }
         }
     )
-    //todo MQTT parameters dialog
     document.getElementById("digit0").src = led14Svg
     document.getElementById("digit1").src = led14Svg
     document.getElementById("digit2").src = led14Svg
@@ -155,21 +217,30 @@
     workspace.registerButtonCallback("file-load", function (button) {
         const js = window.localStorage.getItem(`local-file:${button.info.file_key}`)
         if (js != null) {
-            if (window.workspace_changed && confirm(`Unsaved workspace, load file ${button.info.file_key} anyway?`)) {
-                Blockly.serialization.workspaces.load(JSON.parse(js), workspace);
-                window.workspace_changed = false
+            if (window.workspace_changed) {
+                Blockly.dialog.confirm(`Unsaved workspace, load file ${button.info.file_key} anyway?`,
+                    (q) => {
+                        if (q) {
+                            Blockly.serialization.workspaces.load(JSON.parse(js), workspace);
+                            window.workspace_changed = false
+                        }
+                    })
             }
         } else {
-            alert(`Nothing saved to file ${button.info.file_key}`)
+            Blockly.dialog.alert(`Nothing saved to ${button.info.file_key}`)
         }
 
     })
     workspace.registerButtonCallback("file-save", function (button) {
-        if (confirm(`Save to file ${button.info.file_key}?`)) {
-            const js = JSON.stringify(Blockly.serialization.workspaces.save(workspace));
-            window.localStorage.setItem(`local-file:${button.info.file_key}`, js)
-            window.workspace_changed = false
-        }
+        Blockly.dialog.confirm(`Save blocks to ${button.info.file_key}?`,
+            (q) => {
+                if (q) {
+                    const js = JSON.stringify(Blockly.serialization.workspaces.save(workspace));
+                    window.localStorage.setItem(`local-file:${button.info.file_key}`, js)
+                    window.workspace_changed = false
+                }
+            }
+        )
     })
     EXAMPLES.init(workspace)
 
@@ -211,14 +282,117 @@
         MqttClient.restartPython()
     });
 
-    document.getElementById("settings-board").addEventListener("click", function () {
-        const s = window.prompt("Please enter communication MQTT_TOKEN from secrets.py", MqttClient.mqttToken)
-        if (s !== null) {
-            window.localStorage.setItem("MQTT_TOKEN", s)
-            window.location.reload()
+    // Init dialogs
+    {
+        const dialog = document.querySelector("#dialog-alert")
+        dialog.querySelector("#dialog-alert-ok").addEventListener("click", () => {
+            dialog.close();
+        })
+        dialog.addEventListener("close", dialog._callback)
+        const dialogAlert = function (msg, callback) {
+            dialog.querySelector("#dialog-alert-msg").innerText = msg
+            dialog._callback = callback
+            dialog.showModal()
+            setTimeout(() => {
+                dialog.close()
+            }, 2500)
+        }
+        Blockly.dialog.setAlert(dialogAlert)
+    }
+
+    {
+        const dialog = document.querySelector("#dialog-confirm")
+        dialog.querySelector("#dialog-confirm-cancel").addEventListener("click", () => {
+            dialog.close();
+        })
+        dialog.querySelector("#dialog-confirm-ok").addEventListener("click", () => {
+            dialog.close('true');
+        })
+        dialog.addEventListener("close", (_) => {
+            dialog._callback(dialog.returnValue.toLowerCase() === 'true')
+        })
+        const dialogConfirm = function (msg, callback) {
+            dialog.querySelector("#dialog-confirm-msg").innerText = msg
+            dialog._callback = callback
+            dialog.showModal()
+        }
+        Blockly.dialog.setConfirm(dialogConfirm)
+    }
+
+    {
+        const dialog = document.querySelector("#dialog-prompt")
+        const input = dialog.querySelector("#dialog-prompt-input")
+        dialog.querySelector("#dialog-prompt-cancel").addEventListener("click", () => {
+            dialog.close()
+        })
+        dialog.querySelector("#dialog-prompt-ok").addEventListener("click", () => {
+            dialog.close(input.value)
+        })
+        dialog.addEventListener("close", (_) => {
+            dialog._callback(dialog.returnValue)
+        })
+        const dialogPrompt = function (msg, defaultValue, callback) {
+            dialog.querySelector("#dialog-prompt-msg").innerText = msg
+            input.value = defaultValue
+            dialog._callback = callback
+            dialog.showModal()
+        }
+        Blockly.dialog.setPrompt(dialogPrompt)
+    }
+    //MQTT parameters
+    {
+        const dialog = document.getElementById("dialog-mqtt-params")
+        const defParams = {
+            host: "",
+            port: "8884",
+            path: "/mqtt",
+            user: "",
+            password: "",
         }
 
-    });
+        document.getElementById("settings-board").addEventListener("click", function () {
+            let params
+            try {
+                params = JSON.parse(window.localStorage.getItem(MqttClient.MQTT_PARAMS_KEY))
+            } catch (e) {
+            }
+            if (params == null) params = {}
+            for (const k in defParams) {
+                let value = params[k]
+                if (typeof value !== "string") value = defParams[k]
+                dialog.querySelector(`#dialog-mqtt-${k}`).value = value
+            }
+            dialog.showModal()
+        })
+
+        dialog.querySelector("#dialog-mqtt-cancel").addEventListener("click", () => {
+            dialog.close()
+        })
+        dialog.querySelector("#dialog-mqtt-ok").addEventListener("click", () => {
+            const params = {}
+            let valid = true
+            for (const k in defParams) {
+                let input = dialog.querySelector(`#dialog-mqtt-${k}`)
+                valid &&= input.checkValidity()
+                params[k] = input.value
+            }
+            if (!params.path.startsWith("/")) {
+                params.path = "/" + params.path
+            }
+            if (valid) {
+                dialog.close()
+                Blockly.dialog.confirm(`wss://${params.user}:***@${params.host}:${params.port}${params.path}\nSave these parameters?`,
+                    (q) => {
+                        if (q) {
+                            localStorage.setItem(MqttClient.MQTT_PARAMS_KEY, JSON.stringify(params))
+                            window.location.reload()
+                        }
+                    }
+                )
+            }
+        })
+    }
+
 </script>
 
 </html>
