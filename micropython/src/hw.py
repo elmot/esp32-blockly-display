@@ -10,11 +10,11 @@ class LedClass(object):
         return cls.instance
 
     def __init__(self):
-        self.led = neopixel.NeoPixel(Pin(2), 1)
+        self._led = neopixel.NeoPixel(Pin(2), 1)
 
     def set_color(self, r, g, b):
-        self.led[0] = (r, g, b)
-        self.led.write()
+        self._led[0] = (r, g, b)
+        self._led.write()
 
 
 LED = LedClass()
@@ -30,24 +30,24 @@ class DisplayClass(object):
     def __init__(self):
         super().__init__()
         i2c = I2C(0, scl=Pin(0), sda=Pin(1))
-        self.display = HT16K33Segment14(i2c)
-        self.display.set_brightness(15)
-        self.display.draw()
+        self._display = HT16K33Segment14(i2c)
+        self._display.set_brightness(15)
+        self._display.draw()
 
     def symbol(self, pos, glyph_str):
         glyph = 0
         for c in glyph_str:
             glyph |= self.SEGM14_GLYPHS[c]
-        self.display.set_glyph(glyph=glyph, digit=pos)
+        self._display.set_glyph(glyph=glyph, digit=pos)
 
     def clear(self):
-        self.display.clear()
+        self._display.clear()
 
     def set_brightness(self, brightness):
-        self.display.set_brightness(brightness)
+        self._display.set_brightness(brightness)
 
     def text(self, text):
-        self.display.clear()
+        self._display.clear()
         for i in range(0, 4):
             c = text[i] if i < len(text) else ' '
             try:
@@ -58,7 +58,7 @@ class DisplayClass(object):
         self.draw()
 
     def draw(self):
-        self.display.draw()
+        self._display.draw()
 
     FONT = {
         ' ': '',
