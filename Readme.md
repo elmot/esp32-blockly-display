@@ -25,35 +25,40 @@ Software & SaaS services
 * [HT16K33 Python driver](https://github.com/smittytone/HT16K33-Python)
 * [micropython-mqtt](https://github.com/peterhinch/micropython-mqtt)
 
+How2Run
+----
+1. Solder the Grove connector (shipped with the module) to M5 Stamp-C3U *Port A*
+2. Connect the display module to the MCU module
+3. Connect the MCU module to your computer with USB cable. A COM port should appear
+4. Flash latest [MicroPython](https://micropython.org/download/ESP32_GENERIC_C3/) to the MCU module. 
+[JS ESPTool](https://espressif.github.io/esptool-js/) is a handy tool for it. 
+Note that *.bin* file should be flashed at address *0x0000*
+5. Create a (free) account at a public MQTT broker (ex https://www.hivemq.com/, https://www.emqx.io/) 
+6. Create your own cloud MQTT broker
+7. Create an MQTT user. **NB! Create a strong password and keep it well, otherwise your WLAN may be hacked!**
+8. Write your own *SECRETS.py* file based on the template [secrets_template.py](micropython/src/SECRETS_template.py).
+There should be your specific Wi-Fi SSID, Wi-Fi password, and MQTT lo. 
+9. Upload newly created *SECRETS.py* to the MCU module filesystem. 
+You may use either 
+[PyCharm](https://www.jetbrains.com/pycharm/) with 
+[MicroPython plugin](https://plugins.jetbrains.com/plugin/9777-micropython), 
+[Thonny](https://thonny.org/), or [mpremote](https://docs.micropython.org/en/latest/reference/mpremote.html)
+10. Upload [MicroPython code](micropython) to the MCU board. The tools are above
+11. Reboot the board
+12. Open [elmot.xyz/esp32-blockly-display/](https://www.elmot.xyz/esp32-blockly-display/)
+13. Click gear icon and enter your MQTT parameters, same as in MicroPython part
+14. If everything is done correctly, The board connects to the MQTT broker 
+    * Wi-Fi sign on the web page turns to be dark green
+    * On-Board LED turns green after several seconds 
+
 On-board led statuses
 ----
 * Blue blinking => Wi-Fi connection in progress
 * Red steady => Wi-Fi connection failed
-* Blue steady => MQTT connection in progress
+* Yellow steady => MQTT connection in progress
 * Green steady => MQTT connection established
 
 Technical details
 ----
 Blocks are stored to browser's [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
-
-How2Run
-----
-* Solder the Grove connector (shipped with the module) to M5 Stamp-C3U *Port A*
-* Connect the display module to the MCU module
-* Connect the MCU module to your computer with USB cable. A COM port should appear
-* Flash latest [MicroPython](https://micropython.org/download/ESP32_GENERIC_C3/) to the MCU module. 
-[JS ESPTool](https://espressif.github.io/esptool-js/) is a handy tool for it. 
-Note that *.bin* file should be flashed at address *0x0000*
-* Write your own *secrets.py* file based on the template [secrets_template.py](micropython/src/SECRETS_template.py).
-There should be your specific Wi-Fi SSID, Wi-Fi password, and a random UUID as a MQTT connection token. 
-* Upload newly created *secrets.py* to the MCU module filesystem. 
-You may use either 
-[PyCharm](https://www.jetbrains.com/pycharm/) with 
-[MicroPython plugin](https://plugins.jetbrains.com/plugin/9777-micropython), 
-[Thonny](https://thonny.org/), or [mpremote](https://docs.micropython.org/en/latest/reference/mpremote.html)
-* Upload [MicroPython code](micropython) to the MCU board. The tools are above
-* Open [elmot.xyz/esp32-blockly-display/](https://www.elmot.xyz/esp32-blockly-display/)
-* Click gear icon and enter your mqtt token, same as in MicroPython part
-* If everything is done correctly, WiFi sign on the web page turns to be dark green
-
 
