@@ -3,7 +3,7 @@
   "name": "4*14-Segment Scratch Control",
   "theme_color": "#317EFB",
   "short_name": "Segment toy",
-  "start_url": ".",
+  "start_url": "..",
   "display": "standalone",
   "background_color": "#fff",
   "description": "4*14-Segment Scratch Control",
