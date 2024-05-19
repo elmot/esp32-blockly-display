@@ -4,7 +4,7 @@ function segm14Output(pos, segments) {
     const svg = document.getElementById("digit" + pos)
     if (svg == null) return
     for (let i = 0; i < 14; i++) {
-        const segm = svg.getSVGDocument().querySelectorAll("g g")[i].querySelector("circle, polygon")
+        const segm = svg.getSVGDocument().querySelectorAll("polygon")[i]
         const c = String.fromCharCode(i + 65)
         const color = segments.toUpperCase().indexOf(c) >= 0 ? activeColor : inactiveColor
         segm.style.fill = color

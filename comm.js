@@ -17,7 +17,7 @@ const MqttClient = {
         console.debug(`MQTT: ${tooltip}`)
         const img = document.getElementById("connect-indicator");
         img.querySelector("title").innerHTML = tooltip
-        img.querySelector("g").style.fill = color
+        img.querySelector("path").style.fill = color
     },
     onConnect: function () {
         this.setConnectStatus(this.WAIT_FOR_BOARD_COLOR, "Connected to MQTT")
