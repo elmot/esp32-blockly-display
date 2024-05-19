@@ -37,8 +37,14 @@ class DisplayClass(object):
     def symbol(self, pos, glyph_str):
         glyph = 0
         for c in glyph_str:
-            glyph |= self.SEGM14_GLYPHS[c]
+            try:
+                glyph |= self.SEGM14_GLYPHS[c]
+            except KeyError:
+                pass
         self._display.set_glyph(glyph=glyph, digit=pos)
+        if pos == 2:
+            self._display.set_decimal(glyph_str.find('.') >= 0)
+            self._display.set_colon(glyph_str.find(':') >= 0)
 
     def clear(self):
         self._display.clear()
@@ -48,12 +54,20 @@ class DisplayClass(object):
 
     def text(self, text):
         self._display.clear()
+        deci_dot = text.find(".") >= 0
+        semicolon = text.find(":") >= 0
+        text = text.replace(".", "").replace(":", "")
         for i in range(0, 4):
             c = text[i] if i < len(text) else ' '
             try:
                 glyph_str = self.FONT[c]
             except Exception:
                 glyph_str = ''
+            if i == 2:
+                if deci_dot:
+                    glyph_str = glyph_str + "."
+                if semicolon:
+                    glyph_str = glyph_str + ":"
             self.symbol(i, glyph_str)
         self.draw()
 

@@ -145,7 +145,7 @@ if __name__ == '__main__':
     config['ssid'] = SECRETS.WIFI_SSID
     config['wifi_pw'] = SECRETS.WIFI_PASSWORD
     config['server'] = SECRETS.MQTT_SERVER
-    config['ssl'] = SECRETS.MQTT_SSL
+    config['ssl'] = True
     config['user'] = SECRETS.MQTT_USER
     config['password'] = SECRETS.MQTT_PASSWORD
     config['ssl_params'] = {"server_hostname": SECRETS.MQTT_SERVER}

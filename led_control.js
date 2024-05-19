@@ -1,19 +1,22 @@
 // noinspection JSUnusedGlobalSymbols
 function segm14Output(pos, segments) {
     const inactiveColor = "#F0F0F0", activeColor = "#023FF7"
-    const svg = document.getElementById("digit" + pos)
+    const svg = document.getElementById("digit" + pos)?.getSVGDocument()
     if (svg == null) return
     for (let i = 0; i < 14; i++) {
-        const segm = svg.getSVGDocument().querySelectorAll("polygon")[i]
+        const segm = svg.querySelectorAll("polygon")[i]
         const c = String.fromCharCode(i + 65)
         const color = segments.toUpperCase().indexOf(c) >= 0 ? activeColor : inactiveColor
         segm.style.fill = color
+    }
+    if (pos === 2) {
+        svg.querySelector("#dec_dot").style.fill = segments.indexOf(".") >= 0 ? activeColor : inactiveColor
+        svg.querySelector("#semicolon").style.fill = segments.indexOf(":") >= 0 ? activeColor : inactiveColor
     }
 }
 
 const font = {
     ' ': '',
-    '.': 'o',
     'A': 'EFABCGH',
     'B': 'ABCDJHM',
     'C': 'EFAD',
@@ -99,9 +102,8 @@ const font = {
 };
 
 
-
 function segm14StartScript() {
-    if(this!==window) {
+    if (this !== window) {
         segm14StartScript.call(window)
         return
     }
@@ -115,17 +117,28 @@ function segm14StartScript() {
     setTimeout(() => {
         window.stopMe = false
         f()
-    },100)
+    }, 100)
 }
 
 // noinspection JSUnusedGlobalSymbols
 function segm14Text(text) {
-    for (let i = 0; i < 4; i++) {
+    const digitalDot = text.indexOf(".") >= 0
+    const semicolon = text.indexOf(":") >= 0
+    for (let i = 0, digitIdx = 0; digitIdx < 4; i++) {
         if (window.stopMe) {
             return
         }
-        const shape = font[text.charAt(i)]
-        segm14Output(i, shape === undefined ? "" : shape)
+        const c = text.charAt(i)
+        if (c === "." || c === ":") {
+            continue
+        }
+        let shape = font[c] === undefined ? "" : font[c]
+        if (digitIdx === 2 ) {
+            if(digitalDot) shape += "."
+            if(semicolon) shape += ":"
+        }
+        segm14Output(digitIdx, shape)
+        digitIdx++
     }
 }
 
