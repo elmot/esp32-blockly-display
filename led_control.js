@@ -3,7 +3,7 @@ function segm14Output(pos, segments) {
     const inactiveColor = "#F0F0F0", activeColor = "#023FF7"
     const svg = document.getElementById("digit" + pos)
     if (svg == null) return
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 14; i++) {
         const segm = svg.getSVGDocument().querySelectorAll("g g")[i].querySelector("circle, polygon")
         const c = String.fromCharCode(i + 65)
         const color = segments.toUpperCase().indexOf(c) >= 0 ? activeColor : inactiveColor

@@ -43,9 +43,6 @@
         <g>
             <polygon fill="#F0F0F0" points="50.5,352.2 128.4,243.4 159.9,225.2 124.6,299.8 71.7,373.7 43.7,398.7"/>
         </g>
-        <g>
-            <circle fill="#F0F0F0" cx="296.5" cy="426.5" r="16.5"/>
-        </g>
     </g>
     <g id="Layer_2">
         <text transform="matrix(1 0 0 1 195.5767 24.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">A</text>
@@ -62,6 +59,5 @@
         <text transform="matrix(1 0 0 1 180 303.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">L</text>
         <text transform="matrix(1 0 0 1 135 335.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">M</text>
         <text transform="matrix(1 0 0 1 99.5767 303.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">N</text>
-        <text transform="matrix(1 0 0 1 290 435.2002)" font-family="\'FiraCode-Bold\'" font-size="28px">O</text>
     </g>
 </svg>
