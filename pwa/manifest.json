@@ -1,0 +1,40 @@
+{
+  "id": "/esp32-blockly-display/",
+  "name": "4*14-Segment Scratch Control",
+  "theme_color": "#317EFB",
+  "short_name": "Segment toy",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "4*14-Segment Scratch Control",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "150x150",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon-masked.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots" : [
+  {
+    "src": "screenshot1.png",
+    "sizes": "1280x720",
+    "type": "image/png",
+    "form_factor": "wide",
+    "label": "Homescreen 4*14-Segment Scratch Control"
+  },
+  {
+    "src": "screenshot_m.png",
+    "sizes": "425x720",
+    "type": "image/png",
+    "form_factor": "narrow",
+    "label": "Homescreen 4*14-Segment Scratch Control"
+  }
+]
+}
