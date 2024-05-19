@@ -2,6 +2,7 @@
 function segm14Output(pos, segments) {
     const inactiveColor = "#F0F0F0", activeColor = "#023FF7"
     const svg = document.getElementById("digit" + pos)?.getSVGDocument()
+    segments = String(segments)
     if (svg == null) return
     for (let i = 0; i < 14; i++) {
         const segm = svg.querySelectorAll("polygon")[i]
@@ -122,6 +123,7 @@ function segm14StartScript() {
 
 // noinspection JSUnusedGlobalSymbols
 function segm14Text(text) {
+    text = String(text)
     const digitalDot = text.indexOf(".") >= 0
     const semicolon = text.indexOf(":") >= 0
     for (let i = 0, digitIdx = 0; digitIdx < 4; i++) {

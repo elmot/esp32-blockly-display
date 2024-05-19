@@ -30,12 +30,12 @@ def segm14_check_exit():
 
 def segm14_text(text):
     segm14_check_exit()
-    DISPLAY.text(text)
+    DISPLAY.text(str(text))
 
 
 def segm14_symbol(pos, glyph_str):
     segm14_check_exit()
-    DISPLAY.symbol(pos, glyph_str)
+    DISPLAY.symbol(pos, str(glyph_str))
 
 
 def segm14_output(pos, glyph_str):
