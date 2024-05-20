@@ -8,8 +8,8 @@ const MqttClient = {
     keepAliveTimeout: null,
     pingTimeout: null,
 
-    start: function () {
-        this.connect()
+    disconnect: function () {
+        this.client.disconnect()
     },
 
 

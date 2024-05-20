@@ -205,14 +205,14 @@
     };
     const workspace = Blockly.inject("blocklyDiv", config);
     const CHANGE_EVENTS = new Set([Blockly.Events.BLOCK_CHANGE, Blockly.Events.BLOCK_CREATE, Blockly.Events.BLOCK_DELETE, Blockly.Events.BLOCK_MOVE])
-    workspace.addChangeListener(function (event) {
+    workspace.addChangeListener((event) => {
             if (CHANGE_EVENTS.has(event.type)) {
                 window.workspace_changed = true
                 segm14StartScript()
             }
         }
     )
-    workspace.registerButtonCallback("file-load", function (button) {
+    workspace.registerButtonCallback("file-load", (button) => {
         const js = window.localStorage.getItem(`local-file:${button.info.file_key}`)
         if (js != null) {
             if (window.workspace_changed) {
@@ -229,7 +229,7 @@
         }
 
     })
-    workspace.registerButtonCallback("file-save", function (button) {
+    workspace.registerButtonCallback("file-save", (button) => {
         Blockly.dialog.confirm(`Save blocks to ${button.info.file_key}?`,
             (q) => {
                 if (q) {
@@ -264,21 +264,24 @@
             }
         }, 30000)
     }
-    MqttClient.start()
+    MqttClient.connect()
+    window.addEventListener("beforeunload", () => {
+        MqttClient.disconnect()
+    })
 
-    document.getElementById("restart").addEventListener("click", function () {
+    document.getElementById("restart").addEventListener("click", () => {
         segm14StartScript()
     });
 
-    document.getElementById("upload-board").addEventListener("click", function () {
+    document.getElementById("upload-board").addEventListener("click", () => {
         const js = python.pythonGenerator.workspaceToCode(workspace)
         console.log(js)
         MqttClient.executePython(js)
-    });
+    })
 
-    document.getElementById("restart-board").addEventListener("click", function () {
+    document.getElementById("restart-board").addEventListener("click", () => {
         MqttClient.restartPython()
-    });
+    })
 
     // Init dialogs
     {
@@ -348,7 +351,7 @@
             password: "",
         }
 
-        document.getElementById("settings-board").addEventListener("click", function () {
+        document.getElementById("settings-board").addEventListener("click", () => {
             let params
             try {
                 params = JSON.parse(window.localStorage.getItem(MqttClient.MQTT_PARAMS_KEY))
