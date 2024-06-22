@@ -11,6 +11,9 @@ import _thread
 
 from hw import LED, DISPLAY
 
+# Number class hack
+from numbers import Number
+
 # CONSTANTS
 LAST_CODE_PY = 'last_code.py'
 
@@ -137,6 +140,19 @@ async def main(client):
         # If Wi-Fi is down the following will pause for the duration.
         await client.publish('/keepalive', "", qos=0)
         await asyncio.sleep(3)
+
+# Here the Number part hack starts
+# The problem is that micropython does not support Number class
+# here we use a dummy Number class and substitute `isinstance` function
+_original_isinstance = isinstance
+
+
+def isinstance(instance, aclass):
+    if _original_isinstance(instance, aclass):
+        return True
+    if aclass is Number:
+        return _original_isinstance(instance, (int, float, complex))
+    return False
 
 
 if __name__ == '__main__':
